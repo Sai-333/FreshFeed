@@ -1,0 +1,30 @@
+
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Sai@3999
+      POSTGRES_DB: fampay
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    environment:
+      - PORT=5000
+      - DB_USER=postgres
+      - DB_PASS=Sai@3999
+      - DB_HOST=postgres
+      - DB_NAME=fampay
+      - DB_PORT=5432
+      - YOUTUBE_API_KEY=AIzaSyAI5oi0p3zHgIMjpEoHxoFrglsJ9hfC734

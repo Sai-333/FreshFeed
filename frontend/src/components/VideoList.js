@@ -80,7 +80,7 @@ const VideoList = () => {
                                     <img src={video.thumbnail_url} alt={video.title} width="100" />
                                 </TableCell>
                                 <TableCell>{video.title}</TableCell>
-                                <TableCell>{video.description}</TableCell>
+                                <TableCell>{video.description || 'No Description'}</TableCell>
                                 <TableCell>{new Date(video.published_at).toLocaleString()}</TableCell>
                             </TableRow>
                         ))}

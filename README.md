@@ -5,7 +5,7 @@
 FreshFeed is a **YouTube video fetching API** that continuously retrieves the latest videos based on a predefined search query and stores them in a PostgreSQL database. The project consists of a **Node.js backend**, a **React.js frontend**, and database storage using **PostgreSQL**.
 
 ### **Key Features**
-- ✅ **Fetches latest YouTube videos** every 10 minutes using YouTube Data API v3.
+- ✅ **Fetches latest YouTube videos** every 10 seconds using YouTube Data API v3.
 - ✅ **Stores videos in PostgreSQL** for easy search and retrieval.
 - ✅ **Provides REST API** for retrieving videos.
 - ✅ **Frontend built using React.js & Material-UI**.

@@ -1,33 +1,105 @@
 import React, { useState, useEffect } from 'react';
 import { fetchVideos } from '../services/api';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, TextField, Button } from '@mui/material';
 
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [search, setSearch] = useState('');
+    const [sortBy, setSortBy] = useState('published_at'); // Default sorting by date
+    const [sortOrder, setSortOrder] = useState('desc'); // Default: newest first
 
     useEffect(() => {
-        fetchVideos(1, search).then(setVideos);
-    }, [search]);
+        fetchVideos().then(setVideos);
+    }, []);
+
+    // Handle pagination
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+    // Filter and sort videos
+    const filteredVideos = videos
+        .filter((video) =>
+            video.title.toLowerCase().includes(search.toLowerCase()) ||
+            video.description.toLowerCase().includes(search.toLowerCase())
+        )
+        .sort((a, b) => {
+            if (sortOrder === 'asc') {
+                return a[sortBy] > b[sortBy] ? 1 : -1;
+            } else {
+                return a[sortBy] < b[sortBy] ? 1 : -1;
+            }
+        });
 
     return (
-        <div>
-            <input type="text" placeholder="Search videos..." value={search} onChange={(e) => setSearch(e.target.value)} />
-            <div>
-                {videos.map(video => (
-                    <div key={video.video_id}>
-                        <h3>{video.title}</h3>
-                        <p>{video.description}</p>
-                        <img src={video.thumbnail_url} alt={video.title} />
-                    </div>
-                ))}
-            </div>
+        <div style={{ padding: '20px' }}>
+            <h2>Latest Videos</h2>
+            
+            {/* Search Bar */}
+            <TextField
+                label="Search Videos"
+                variant="outlined"
+                fullWidth
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{ marginBottom: '15px' }}
+            />
+
+            {/* Table */}
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell><strong>ID</strong></TableCell>
+                            <TableCell><strong>Thumbnail</strong></TableCell>
+                            <TableCell>
+                                <Button onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}>
+                                    <strong>Title {sortBy === 'title' ? (sortOrder === 'asc' ? '🔼' : '🔽') : ''}</strong>
+                                </Button>
+                            </TableCell>
+                            <TableCell><strong>Description</strong></TableCell>
+                            <TableCell>
+                                <Button onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}>
+                                    <strong>Published At {sortBy === 'published_at' ? (sortOrder === 'asc' ? '🔼' : '🔽') : ''}</strong>
+                                </Button>
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {filteredVideos.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((video) => (
+                            <TableRow key={video.video_id}>
+                                <TableCell>{video.id}</TableCell>
+                                <TableCell>
+                                    <img src={video.thumbnail_url} alt={video.title} width="100" />
+                                </TableCell>
+                                <TableCell>{video.title}</TableCell>
+                                <TableCell>{video.description}</TableCell>
+                                <TableCell>{new Date(video.published_at).toLocaleString()}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+            {/* Pagination Controls */}
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 20]}
+                component="div"
+                count={filteredVideos.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
         </div>
     );
 };
 
 export default VideoList;
-// In the above code, we are defining a functional component  VideoList  that fetches videos from the backend server using the  fetchVideos  function.
-//  We are using the  useState  hook to manage the state of the videos array and the search query. We are using the  useEffect  hook to fetch videos when the component mounts or when the search query changes.
-//   We are rendering an input field for searching videos and a list of videos with their titles, descriptions, and thumbnail images. Each video item is rendered as a div element with the video title, description, and thumbnail image.
-//    The key for each video item is set to the video_id to ensure uniqueness. The thumbnail image is displayed using an img element with the src attribute set to the video's thumbnail_url and the alt attribute set to the video's title.
-//     The search input field is a controlled component that updates the search state when the user types in the input field. The videos array is mapped to a list of video elements using the map method, and each video item is rendered with its title, description, and thumbnail image.

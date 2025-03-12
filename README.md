@@ -1,6 +1,6 @@
 # FreshFeed - YouTube Video Fetching API
 
-![FreshFeed Banner](https://your-image-link.com/banner.png)
+![FreshFeed Banner](https://www.google.com/imgres?q=freshfeed%20videos%20png&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D122097385184266429&imgrefurl=https%3A%2F%2Fm.facebook.com%2F61557992878167&docid=HspuN84lFxKoyM&tbnid=fmUPQBI26i2IPM&vet=12ahUKEwivlI_tpISMAxWKd2wGHU9fJlgQM3oECGIQAA..i&w=970&h=426&hcb=2&itg=1&ved=2ahUKEwivlI_tpISMAxWKd2wGHU9fJlgQM3oECGIQAA)
 
 ## About The Project
 
@@ -50,7 +50,7 @@ PORT=5000
 DB_USER=db_user
 DB_PASS=yourpassword
 DB_HOST=localhost
-DB_NAME=your name
+DB_NAME=db_name
 DB_PORT=5432
 YOUTUBE_API_KEYS=your_api_key1,your_api_key2
 ```
@@ -71,7 +71,7 @@ Frontend will be available at: `http://localhost:3000`
 #### **4. Set Up the Database**
 If using PostgreSQL manually:
 ```sh
-psql -U postgres -d fampay -f database/init.sql
+psql -U db_user -d db_name -f database/init.sql
 ```
 If using Docker:
 ```sh
@@ -102,18 +102,11 @@ FreshFeed/
 │── docker-compose.yml        # Docker setup for backend & database
 ```
 
-## **Contributing**
-1. Fork the repo
-2. Create your feature branch (`git checkout -b feature-name`)
-3. Commit changes (`git commit -m 'Add feature'`)
-4. Push to the branch (`git push origin feature-name`)
-5. Open a Pull Request
-
 ## **License**
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## **Contact**
-**Your Name** - [LinkedIn](https://linkedin.com/in/yourname) - your.email@example.com
+**Your Name** - [LinkedIn](https://www.linkedin.com/in/sai-balaram-reddy-maguluri-a0a9171a9)
 
-Project Link: [https://github.com/yourusername/FreshFeed](https://github.com/yourusername/FreshFeed)
+Project Link: [https://github.com/Sai-333/FreshFeed](https://github.com/Sai-333/FreshFeed)
 

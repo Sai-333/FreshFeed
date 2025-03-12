@@ -1,5 +1,15 @@
 const axios = require('axios');
 const pool = require('../db');
+require('dotenv').config(); // ✅ Ensure dotenv is loaded
+
+const apiKeys = process.env.YOUTUBE_API_KEY?.split(",") || []; // Prevent undefined error
+let currentKeyIndex = 0;
+
+if (apiKeys.length === 0) {
+    console.error("No API keys found. Check your .env file.");
+    process.exit(1); // Stop the server if no API keys are loaded
+}
+
 
 const fetchVideos = async () => {
     try {
@@ -10,7 +20,7 @@ const fetchVideos = async () => {
                 type: 'video',
                 order: 'date',
                 publishedAfter: new Date(Date.now()).toISOString(),
-                key: 'AIzaSyAI5oi0p3zHgIMjpEoHxoFrglsJ9hfC734', 
+                key: apiKeys[currentKeyIndex], // Uses API key from .env
             }
         });
 
@@ -24,7 +34,7 @@ const fetchVideos = async () => {
     } catch (error) {
         if (error.response?.data?.error?.errors[0]?.reason === "quotaExceeded") {
             console.error("API Key limit reached, switching to next key...");
-            currentKeyIndex = (currentKeyIndex + 1) % apiKeys.length; // Rotate API key
+            currentKeyIndex = (currentKeyIndex + 1) % apiKeys.length; // Rotates API keys
         } else {
             console.error('Error fetching videos:', error.message);
         }
@@ -32,8 +42,3 @@ const fetchVideos = async () => {
 };
 
 module.exports = fetchVideos;
-    
-    // In the above code, we are using the  axios  library to make an HTTP GET request to the YouTube Data API. We are fetching the latest videos related to technology that were published in the last hour. You can change the search query and time frame as needed. 
-    // The response from the API contains an array of video items. We are iterating over these items and inserting the video data into the  videos  table in our PostgreSQL database. We are using the  ON CONFLICT DO NOTHING  clause to avoid inserting duplicate videos. 
-    // Finally, we are exporting the  fetchVideos  function so that it can be used in other parts of our application. 
-    

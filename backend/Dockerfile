@@ -1,29 +1,20 @@
-# Use an official Node.js runtime as a parent image
+# Use Node.js official image
 FROM node:18
 
-# Set the working directory inside the container
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json before running npm install
+# Copy package files first (for better caching)
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application files
+# Copy the rest of the application
 COPY . .
 
-# Expose the port the app runs on
+# Expose the backend port
 EXPOSE 5000
 
-# Define environment variables
-ENV PORT=5000
-ENV DB_USER=postgres
-ENV DB_PASS=Sai@3999
-ENV DB_HOST=postgres
-ENV DB_NAME=fampay
-ENV DB_PORT=5432
-ENV YOUTUBE_API_KEY=AIzaSyAI5oi0p3zHgIMjpEoHxoFrglsJ9hfC734
-
 # Start the application
-CMD ["node", "src/server.js"]
+CMD ["npm", "run", "dev"]

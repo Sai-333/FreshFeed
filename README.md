@@ -1,7 +1,5 @@
 # FreshFeed - YouTube Video Fetching API
 
-![FreshFeed Banner](https://www.google.com/imgres?q=freshfeed%20videos%20png&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D122097385184266429&imgrefurl=https%3A%2F%2Fm.facebook.com%2F61557992878167&docid=HspuN84lFxKoyM&tbnid=fmUPQBI26i2IPM&vet=12ahUKEwivlI_tpISMAxWKd2wGHU9fJlgQM3oECGIQAA..i&w=970&h=426&hcb=2&itg=1&ved=2ahUKEwivlI_tpISMAxWKd2wGHU9fJlgQM3oECGIQAA)
-
 ## About The Project
 
 FreshFeed is a **YouTube video fetching API** that continuously retrieves the latest videos based on a predefined search query and stores them in a PostgreSQL database. The project consists of a **Node.js backend**, a **React.js frontend**, and database storage using **PostgreSQL**.
@@ -9,9 +7,9 @@ FreshFeed is a **YouTube video fetching API** that continuously retrieves the la
 ### **Key Features**
 - ✅ **Fetches latest YouTube videos** every 10 minutes using YouTube Data API v3.
 - ✅ **Stores videos in PostgreSQL** for easy search and retrieval.
-- ✅ **Provides REST API** for searching and retrieving videos.
+- ✅ **Provides REST API** for retrieving videos.
 - ✅ **Frontend built using React.js & Material-UI**.
-- ✅ **Pagination & Sorting support** for efficient video browsing.
+- ✅ **Pagination & Sorting support** .
 
 ## **Built With**
 
@@ -59,6 +57,7 @@ Start the backend server:
 ```sh
 npm run dev
 ```
+backend will be available at: `http://localhost:5000`
 
 #### **3. Set Up the Frontend**
 ```sh
@@ -85,7 +84,6 @@ docker-compose up -d
 | Method | Endpoint         | Description |
 |--------|-----------------|-------------|
 | GET    | `/api/videos`   | Fetch stored videos |
-| GET    | `/api/videos?page=1&search=tech` | Paginated video search |
 
 ### **Testing the API**
 ```sh
@@ -106,7 +104,7 @@ FreshFeed/
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## **Contact**
-**Your Name** - [LinkedIn](https://www.linkedin.com/in/sai-balaram-reddy-maguluri-a0a9171a9)
+**Sai Balaram Reddy Maguluri** - [LinkedIn](https://www.linkedin.com/in/sai-balaram-reddy-maguluri-a0a9171a9)
 
 Project Link: [https://github.com/Sai-333/FreshFeed](https://github.com/Sai-333/FreshFeed)
 

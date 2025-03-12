@@ -41,6 +41,16 @@ const VideoList = () => {
     return (
         <div style={{ padding: '20px' }}>
             <h2>Latest Videos</h2>
+            
+            {/* Search Bar */}
+            <TextField
+                label="Search Videos"
+                variant="outlined"
+                fullWidth
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{ marginBottom: '15px' }}
+            />
 
             {/* Table */}
             <TableContainer component={Paper}>
